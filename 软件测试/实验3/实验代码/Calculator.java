@@ -1,4 +1,3 @@
-package 实验代码;
 
 public class Calculator {
 
