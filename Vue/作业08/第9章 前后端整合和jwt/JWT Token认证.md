@@ -15,7 +15,7 @@ session是同域的，发起请求的是前端，接收在后端，对浏览器�
 		String s = Jwts.builder().setHeaderParam("typ", "JWT")
 		.signWith(SignatureAlgorithm.HS512, "asecretkey")
 		.setClaims(map)
-		.setSubject("tom1234")
+		.setSubject("tom1234") 
 		.setIssuedAt(new Date())
 		.setExpiration(new Date(System.currentTimeMillis()+3600*1000))
 		.compact();
@@ -28,6 +28,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b20xMjM0IiwibmFtZSI6InRvbSIsImV
 他被```.```分成三块。
 放到这里解码：
 http://jwt.calebb.net/
+
 ```json
 {
     typ: "JWT",
@@ -46,10 +47,49 @@ http://jwt.calebb.net/
 第一个块是头部，这块申明了这个JWT的类型和加密算法，比如这里是```HS512```加密算法。
 第二个块是负载(payload)，这个块存放具体信息，比如对于登录，你可以简单存放一个用户的id，**再次重申！JWT的payload是明文传输，不要存放敏感信息**。
 第三个块是加密签名，这个块将保证信息不被伪造。他把前两个块的内容拼接后附加上一个附加密码然后进行hash操作。本例中就是：
+
 ```java
 .signWith(SignatureAlgorithm.HS512, "asecretkey")
 ```
 这个部分，也就是附加的密钥是```ascreatkey```了。
+
+### Header头部信息：指定类型和算法
+
+- typ：用来标识整个token字符串是一个JWT字符串
+- alg：用来说明这个JWT签发的时候所使用的签名和摘要算法
+- 一般签发JWT的时候，header对应的json结构只需要typ和alg属性就够了。JWT的header部分是把前面的json结构，经过Base64Url编码之后生成出来的
+
+### Payload 荷载信息
+
+**存放Claims声明信息既主体信息组成。用来存储JWT基本信息，或者是我们的信息。**
+
+payload用来承载要传递的数据，它的json结构实际上是对JWT要传递的数据的一组声明，这些声明被JWT标准称为claims。当后面对JWT进行验证的时候，这些claim都能发挥特定的作用。
+
+
+
+**根据JWT的标准，这些claims可以分为以下三种类型：**
+
+- Reserved claims
+
+保留的claims都是可选的，JWT标准里面针对它自己规定的claim都提供了有详细的验证规则描述，每个实现库都会参照这个描述来提供JWT的验证实现。
+
+- Public calims
+
+不重要
+
+- Private claims
+
+自定义的claim不会验证，除非明确告诉接收方要对这些claim进行验证以及规则才行；标准的claim知道如何进行验证。
+
+
+
+### Signature
+
+把前两者对应的Json结构进行base64url编码之后的字符串拼接起来和密钥放一起加密后的签名，验证是否是我们服务器发起的Token，secret是我们的密钥。使用base64拼接很容易破解，所以建议在传输过程中采用ssl加密是最稳妥的。
+
+**组成方式：**header+playload+signature
+
+
 
 ## JWT如何运作
 看图：
