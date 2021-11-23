@@ -110,10 +110,14 @@ public class JwtUtil {
 	static public String generateToken( Integer id ) {
 		String s = Jwts.builder()
 			.setHeaderParam("typ", "JWT")
-			.signWith(SignatureAlgorithm.HS512, key)
+            //jwt的id
 			.setId(id.toString())
 			.setIssuedAt(new Date())
-			.setExpiration(new Date(System.currentTimeMillis()+ttl))
+            //有效时间：当前系统时间+一整天
+			.setExpiration(new Date(System.currentTimeMillis()+ttl)) 
+            //签名算法  key就是自定义的签名
+            .signWith(SignatureAlgorithm.HS512, key)
+            //p
 			.compact();
 		return s;
 	}
@@ -266,7 +270,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
          self = this;
          network.login(this.username, this.password)
          .then(function(res){
-            window.localStorage.setItem("token",res.data.token);
+            window.localStorage.setItem("token",res.data.token)
             window.localStorage.setItem("username",res.data.username);
             self.nologin = false;
             self.loginname = res.data.username;
