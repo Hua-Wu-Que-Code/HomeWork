@@ -7,7 +7,6 @@ import 'vant/lib/index.css'
 import request from "./network/request";
 import store from "./store";
 import axios from "@/plugins/axios";
-import mock from './mock'
 
 Vue.prototype.$ajax = request;
 Vue.config.productionTip = false

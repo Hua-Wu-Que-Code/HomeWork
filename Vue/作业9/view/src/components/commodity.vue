@@ -23,7 +23,7 @@
     >
       <template #tags>
         <van-tag plain type="primary">{{message.publisher}}</van-tag><br />
-        <van-tag type="danger" style="margin-top: 5px">{{message.category}}</van-tag><br/>
+<!--        <van-tag type="danger" style="margin-top: 5px">{{message.category}}</van-tag><br/>-->
       </template>
     </van-card>
     <div class="description" v-html="message.description"></div>
@@ -55,15 +55,16 @@ export default {
   created: function () {
     let self = this;
     this.id = this.$route.params.id;
-    axios({
-      url:"/json/details/"+this.id+".json",
+    this.$ajax({
+      url:"/category/books/details",
       method:'get',
+      params:{id:this.id}
     })
-        .then(function(response){
-          self.message = response.data;
-          self.message.img = "/" + self.message.img;
-          self.message.description = self.message.description.replace(/\n/g, '<br>')
-        })
+    .then(function(response){
+      self.message = response.data;
+      self.message.img = "/" + self.message.img;
+      self.message.description = self.message.description.replaceAll("\\n", '<br>')
+    })
   },
   mounted(){
 

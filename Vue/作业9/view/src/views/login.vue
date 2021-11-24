@@ -11,7 +11,7 @@
       round
       width="10rem"
       height="10rem"
-      src="/image/头像.png"
+      src="/icons/avatar_default.png"
       class="t"
   />
   <div class="t">尚未登录</div>
@@ -51,6 +51,7 @@ export default {
           passwd:this.passWord
         }).then(res => {
 
+          console.log(res)
           if (res.code == 100) {
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("username",res.data.name);

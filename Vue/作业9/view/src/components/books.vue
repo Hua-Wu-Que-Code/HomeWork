@@ -11,7 +11,7 @@
       style="text-align: left"
   >
     <template #tags>
-      <van-tag type="danger">{{value.category}}</van-tag>
+      <van-tag type="danger">{{value.publisher}}</van-tag>
     </template>
     <template #footer>
       <van-icon @click="toBy(value.id)" name="shopping-cart" size="30" color="red" />
@@ -35,9 +35,10 @@ export default {
   created: function () {
     let self = this;
     this.key = this.$route.params.key;
-    axios({
-      url:"/json/category/"+this.key+".json",
+    this.$ajax({
+      url:"/category/books",
       method:'get',
+      params: { id: this.key }
     })
     .then(function(response){
       self.message = response.data;

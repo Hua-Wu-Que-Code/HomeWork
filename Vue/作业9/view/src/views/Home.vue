@@ -9,7 +9,7 @@
       </van-swipe-item>
     </van-swipe>
     <van-grid :column-num="3" :gutter="10">
-      <van-grid-item :class="{active: ifActive(index) }" v-for="(value,index) in category" :key="index" icon="photo-o" :text="value" @click="hand(value , index)"/>
+      <van-grid-item :class="{active: ifActive(index) }" v-for="(value,index) in category" :key="index" icon="photo-o" :text="value.name" @click="hand(value.id , index)"/>
     </van-grid>
     <router-view :key="$route.path" />
   </div>
@@ -43,7 +43,7 @@ export default {
         method:'get',
       })
       .then(function(response){
-          self.category = response.data;
+        self.category = response.data
       })
     },
   methods: {

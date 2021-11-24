@@ -4,7 +4,7 @@
         round
         width="10rem"
         height="10rem"
-        src="/image/头像.png"
+        src="/icons/avatar_default.png"
         class="t"
     />
     <div class="t">{{msg}}</div>

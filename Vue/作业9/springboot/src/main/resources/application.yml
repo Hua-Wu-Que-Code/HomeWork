@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://212.129.255.225:3306/springboot?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    username: springboot
+    url: jdbc:mysql://212.129.255.225:3306/vue?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: vue
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
 

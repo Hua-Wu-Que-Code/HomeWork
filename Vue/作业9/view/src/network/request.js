@@ -13,10 +13,10 @@ const request = axios.create({
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
 
-    let userJson = sessionStorage.getItem("user");
+    /*let userJson = sessionStorage.getItem("user");
     if (!userJson) {
          router.push("/")
-    }
+    }*/
     // config.headers['token'] = user.token;  // 设置请求头
     return config
 }, error => {
