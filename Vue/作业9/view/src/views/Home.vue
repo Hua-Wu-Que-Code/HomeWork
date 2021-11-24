@@ -38,8 +38,8 @@ export default {
   },
   created: function () {
       let self = this;
-      axios({
-        url:"/json/category.json",
+      this.$ajax({
+        url:"/category",
         method:'get',
       })
       .then(function(response){

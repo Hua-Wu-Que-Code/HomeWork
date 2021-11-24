@@ -4,26 +4,28 @@ import com.example.springboot.entity.Result;
 import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserVO;
 import com.example.springboot.jwt.JwtUtil;
+import com.example.springboot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RestController
 public class UserController {
 
-    private final Integer ID = 5;
-    private final String USERNAME = "花无缺";
-    private final String PASSWD = "123456";
+    @Autowired
+    UserService userService;
 
     @PostMapping("/login")
     @CrossOrigin
     @ResponseBody
     public Result login(@RequestBody User user) {
-
-        if (user.getName().equals(USERNAME) && user.getPasswd().equals(PASSWD)) {
-            //添加token
-            UserVO vo = new UserVO(user.getName(),JwtUtil.generateToken(ID));
-            return Result.succeed(vo);
+        User loginUser = userService.findUser(user);
+        if (loginUser != null) {
+            UserVO userVO = new UserVO(loginUser.getName(),JwtUtil.generateToken(loginUser.getId()),loginUser.getPrivilege());
+            return Result.succeed(userVO);
         }
         return Result.fail();
     }
