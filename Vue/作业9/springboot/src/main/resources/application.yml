@@ -1,0 +1,18 @@
+server:
+  port: 9990
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://212.129.255.225:3306/springboot?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: springboot
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#整合mybatis,设置别名，识别mapper文件
+#mybatis:
+#  type-aliases-package: com.kuang.pojo
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+
+logging:
+  level:
+    root: debug
