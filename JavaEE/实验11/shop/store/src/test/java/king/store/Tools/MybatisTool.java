@@ -1,5 +1,13 @@
 package king.store.Tools;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import java.io.IOException;
+import java.io.Reader;
+
 public class MybatisTool {
     public static SqlSession getSqlSession() throws IOException {
         //1.获取字节输入流

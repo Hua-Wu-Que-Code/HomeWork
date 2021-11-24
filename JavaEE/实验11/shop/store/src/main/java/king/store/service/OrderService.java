@@ -1,4 +1,4 @@
-package king.store;
+package king.store.service;
 
 import king.store.entity.Article;
 import king.store.entity.Order;
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArticleService {
+public class OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    public Order findArticle() {
+    public Order findOrders() {
         return orderMapper.selectById(1);
     }
 }
