@@ -18,6 +18,7 @@
 <script>
 // @ is an alias to /src
 import { Toast } from 'vant';
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: 'Home',
@@ -33,19 +34,13 @@ export default {
         require("/public/slider/4.jpg"),
         require("/public/slider/5.jpg"),
       ],
-      category: []
     }
   },
   created: function () {
-      let self = this;
-      this.$ajax({
-        url:"/category",
-        method:'get',
-      })
-      .then(function(response){
-        self.category = response.data
-      })
     },
+  computed: {
+    ...mapState({category:'category'})
+  },
   methods: {
     onSearch() {
       const id = this.value;

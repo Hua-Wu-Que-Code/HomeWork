@@ -20,10 +20,10 @@ export default {
     }
   },
   created() {
-    //this.asyncSetGoodsListInit();
+    this.asyncInitCategory();
   },
   methods:{
-
+    ...mapActions({asyncInitCategory:'asyncInitCategory'}),
   }
 }
 </script>
