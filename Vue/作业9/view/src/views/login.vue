@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import {Dialog} from "vant";
+
 export default {
   name: "login",
   data() {
@@ -46,19 +48,20 @@ export default {
     login() {
       if (this.accountName != '' && this.passWord != '') {
         let self = this;
-        this.$ajax.post("/login",{
-          name: this.accountName,
-          passwd:this.passWord
-        }).then(res => {
-
-          console.log(res)
+        this.$ajax.login(this.accountName,this.passWord).then(res => {
           if (res.code == 100) {
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("username",res.data.name);
             this.$store.commit('changeLogin',true);
             this.$router.push({name:'Info'});
+          } else {
+            Dialog(
+                {
+                  message:"登录失败:"+res.message,
+                  theme: 'round-button',
+                }
+            )
           }
-
         })
       } else {
         if (this.accountName == '') this.accountNameMsg="请输入账号"

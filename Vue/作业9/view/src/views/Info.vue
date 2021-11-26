@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     changeType() {
-      console.log(this.ifLogin)
       if (this.ifLogin) {
         localStorage.removeItem("username");
         localStorage.removeItem("token");
