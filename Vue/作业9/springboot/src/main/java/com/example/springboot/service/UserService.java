@@ -15,7 +15,7 @@ public class UserService {
     UserMapper userMapper;
 
     public User findUser(User user) {
-        String name = user.getName();
+        String name = user.getUsername();
         String passwd = user.getPasswd();
         return userMapper.findUser(name,passwd);
     }

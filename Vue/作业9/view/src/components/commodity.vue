@@ -35,7 +35,7 @@
       <van-goods-action-button
           type="danger"
           text="立即购买"
-          @click="onClickButton"
+          @click="toBy(message.id)"
       />
     </van-goods-action>
   </div>
@@ -55,11 +55,12 @@ export default {
   created: function () {
     let self = this;
     this.id = this.$route.params.id;
-    this.$ajax({
+    this.$ajax.get_book_detailed(this.id)
+    /*this.$ajax({
       url:"/category/books/details",
       method:'get',
       params:{id:this.id}
-    })
+    })*/
     .then(function(response){
       self.message = response.data;
       self.message.img = "/" + self.message.img;
@@ -76,8 +77,8 @@ export default {
     onClickIcon() {
       Toast('点击图标');
     },
-    onClickButton() {
-      Toast('点击按钮');
+    toBy(id) {
+      this.$store.commit('addGoodItem',id)
     },
   },
 

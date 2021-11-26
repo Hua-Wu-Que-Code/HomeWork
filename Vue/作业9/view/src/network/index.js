@@ -1,5 +1,6 @@
 import axios from "axios"
 import request from "@/network/request";
+import loginRequest from "@/network/loginRequest";
 export default{
     get_category(){
         return request.get("/category");
@@ -9,6 +10,22 @@ export default{
             name,
             passwd
         })
+    },
+    get_category_books(id) {
+        return request.get("/category/books",{
+            params: { id }
+        });
+    },
+    get_book_detailed(id) {
+        return request.get("/category/books/details",{
+            params:{id}
+        })
+    },
+    addGoodItem(id) {
+        return loginRequest({
+            url:"",
+            method:'post',
+            params: { id: this.key }
+        })
     }
-
 }

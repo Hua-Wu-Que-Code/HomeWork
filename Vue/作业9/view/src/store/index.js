@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     },
     mutations: {
         addGoodItem(state,id) {
-
+            network.addGoodItem(id);
         },
         deleteGoodItem(state,id) {
 

@@ -35,11 +35,12 @@ export default {
   created: function () {
     let self = this;
     this.key = this.$route.params.key;
-    this.$ajax({
-      url:"/category/books",
+    this.$ajax.get_category_books(this.key)
+    /*this.axios({
+      url:"http://localhost:9990/category/books",
       method:'get',
       params: { id: this.key }
-    })
+    })*/
     .then(function(response){
       self.message = response.data;
       for (let i = 0; i < self.message.length; i++) {
@@ -54,7 +55,7 @@ export default {
     },
     toBy(id) {
       this.$store.commit('addGoodItem',id)
-      this.$router.push('/ShoppingCart');
+      //this.$router.push('/ShoppingCart');
     },
 
   }

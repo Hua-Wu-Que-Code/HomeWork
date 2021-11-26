@@ -24,7 +24,7 @@ public class UserController {
     public Result login(@RequestBody User user) {
         User loginUser = userService.findUser(user);
         if (loginUser != null) {
-            UserVO userVO = new UserVO(loginUser.getName(),JwtUtil.generateToken(loginUser.getId()),loginUser.getPrivilege());
+            UserVO userVO = new UserVO(loginUser.getUsername(),JwtUtil.generateToken(loginUser.getId()),loginUser.getPrivilege());
             return Result.succeed(userVO);
         }
         return Result.fail();

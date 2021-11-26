@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class User {
     private Integer id;
-    private String name;
+    private String username;
     private String passwd;
     private String privilege;
 
     public User(String name, String passwd) {
-        this.name = name;
+        this.username = name;
         this.passwd = passwd;
     }
 }
