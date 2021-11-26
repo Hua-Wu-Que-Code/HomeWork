@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from "../router";
+import {Dialog} from "vant";
 
 //创建了一个request对象
 const request = axios.create({
@@ -13,9 +14,9 @@ const request = axios.create({
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
 
-    /*let userJson = sessionStorage.getItem("user");
+    /*let userJson = sessionStorage.getItem("username");
     if (!userJson) {
-         router.push("/")
+         Dialog({message: '尚未登录'})
     }*/
     // config.headers['token'] = user.token;  // 设置请求头
     return config
