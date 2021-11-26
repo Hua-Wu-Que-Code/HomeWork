@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import request from "@/network/request";
+import network from "@/network/index"
 import login from "@/views/login";
 
 Vue.use(Vuex)
@@ -36,10 +36,7 @@ const store = new Vuex.Store({
     },
     actions: {
         asyncInitCategory(context) {
-            request({
-                url:"/category",
-                method:'get',
-            })
+            network.get_category()
             .then(res=>{
                 context.commit('initCategory',res.data)
             })

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from "../router";
 import {Dialog} from "vant";
+import * as url from "url";
 
 //创建了一个request对象
 const request = axios.create({

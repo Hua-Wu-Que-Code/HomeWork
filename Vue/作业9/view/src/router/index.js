@@ -76,6 +76,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next) => {
+  //从from跳转到to
+
   //必须调用
   next();
 })

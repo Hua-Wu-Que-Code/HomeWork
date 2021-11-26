@@ -4,11 +4,10 @@ import App from './App.vue'
 import router from './router'
 import Vant,{Lazyload} from 'vant'
 import 'vant/lib/index.css'
-import request from "./network/request";
+import network from "./network/index";
 import store from "./store";
-import axios from "@/plugins/axios";
 
-Vue.prototype.$ajax = request;
+Vue.prototype.$ajax = network;
 Vue.config.productionTip = false
 Vue.config.devtool=true
 
