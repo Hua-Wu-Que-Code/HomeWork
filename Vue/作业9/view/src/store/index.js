@@ -20,12 +20,7 @@ const store = new Vuex.Store({
 
         },
         changeItemFlag(state,id) {
-            for (let i = 0; i < state.goodsList.length;i++) {
-                if (state.goodsList[i].id == id) {
 
-                    state.goodsList[i].flag = !state.goodsList[i].flag;
-                }
-            }
         },
         changeLogin(state,flag) {
             state.login = flag;
@@ -40,6 +35,9 @@ const store = new Vuex.Store({
             .then(res=>{
                 context.commit('initCategory',res.data)
             })
+        },
+        asyncAddGoodItem(context){
+
         }
     }
 })

@@ -23,7 +23,7 @@ export default{
     },
     addGoodItem(id) {
         return loginRequest({
-            url:"",
+            url:"/shoppingCart/add",
             method:'post',
             params: { id: this.key }
         })
