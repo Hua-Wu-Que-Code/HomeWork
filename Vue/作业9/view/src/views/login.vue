@@ -53,6 +53,7 @@ export default {
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("username",res.data.name);
             this.$store.commit('changeLogin',true);
+            this.$store.dispatch('asyncInitShoppingCart');
             this.$router.push({name:'Info'});
           } else {
             Dialog(

@@ -54,7 +54,7 @@ export default {
       this.$router.push({name:"Books",params:{id}});
     },
     toBy(id) {
-      this.$store.commit('addGoodItem',id)
+      this.$store.dispatch('asyncAddGoodItem',id)
       //this.$router.push('/ShoppingCart');
     },
 

@@ -1,20 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import network from "@/network/index"
-import login from "@/views/login";
+
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
         goodsList: [],
-        login: false,
         total: 0,
-        category:[]
+        category:[],
+        login: false
     },
     mutations: {
         addGoodItem(state,id) {
-            network.addGoodItem(id);
+
         },
         deleteGoodItem(state,id) {
 
@@ -27,18 +27,42 @@ const store = new Vuex.Store({
         },
         initCategory(state,list) {
             state.category = list;
+        },
+        initGoodList(state,list) {
+            state.goodsList = list;
+
         }
     },
     actions: {
         asyncInitCategory(context) {
+            //初始化导航
             network.get_category()
             .then(res=>{
                 context.commit('initCategory',res.data)
             })
-        },
-        asyncAddGoodItem(context){
 
+        },
+        asyncInitShoppingCart(context) {
+            //初始化购物车
+            if (localStorage.getItem("username")) {
+                context.commit('changeLogin',true);
+                //初始化购物车
+                network.get_shoppingCart()
+                    .then(res=>{
+                        context.commit('initGoodList',res.data.items)
+                    })
+            } else {
+                context.commit('initGoodList',"")
+            }
+        },
+        asyncAddGoodItem(context,id){
+            network.addGoodItem(id).then(res => {
+                console.log(res)
+            })
         }
+    },
+    getters: {
+
     }
 })
 

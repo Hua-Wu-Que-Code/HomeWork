@@ -8,22 +8,22 @@
   <van-checkbox-group v-model="result">
   <van-card
       v-for="(value,index) in list"
-      :price="value.price"
-      v-if="value.num!=0"
-      :desc="value.author"
-      :thumb="value.img"
+      :price="value.book.price"
+      v-if="value.book.num!=0"
+      :desc="value.book.author"
+      :thumb="value.book.img"
       style="padding-left: 30px"
   >
     <template #title>
       {{value.name}}
-      <van-icon name="delete-o" size="20" color="red" class="delete" @click="toDelete(value.id)"/>
+      <van-icon name="delete-o" size="20" color="red" class="delete" @click="toDelete(value.book.id)"/>
     </template>
 
     <template #price-top>
-      <van-checkbox :name="value.id" v-model="value.flag" class="check" @click="iClick(value.id)" />
+      <van-checkbox :name="value.book.id" v-model="value.flag" class="check" @click="iClick(value.book.id)" />
     </template>
     <template #footer>
-      <van-stepper v-model="value.num" theme="round" button-size="22" disable-input/>
+      <van-stepper v-model="value.book.num" theme="round" button-size="22" disable-input/>
     </template>
 
   </van-card>
@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
+import {Dialog} from "vant";
 
 export default {
   name: "ShoppingCart",
@@ -72,11 +73,17 @@ export default {
 
     },
     load() {
-
+      this.$store.dispatch('asyncInitShoppingCart')
     }
   },
   created() {
-    this.load();
+    if (localStorage.getItem("username")) {
+      this.load();
+    } else {
+      this.load();
+      Dialog({message:"尚未登录"})
+    }
+
   }
 }
 </script>

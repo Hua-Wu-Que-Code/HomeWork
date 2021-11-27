@@ -3,4 +3,7 @@
 <mapper namespace="com.example.springboot.mapper.Shopping_cart_itemMapper">
 
 
+    <select id="findItemsById" resultType="com.example.springboot.entity.Shopping_cart_item">
+        select * from shopping_cart_item where shopping_cart_id=#{shoppingCartId}
+    </select>
 </mapper>

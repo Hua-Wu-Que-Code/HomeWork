@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: "Info",
   data() {
@@ -28,7 +28,7 @@ export default {
       if (this.ifLogin) {
         localStorage.removeItem("username");
         localStorage.removeItem("token");
-        this.$store.commit('changeLogin',false);
+        this.$store.commit('changeLogin',false)
         this.init();
       } else {
         this.$router.push({name:'login'})

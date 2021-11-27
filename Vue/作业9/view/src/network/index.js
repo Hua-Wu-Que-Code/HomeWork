@@ -25,7 +25,14 @@ export default{
         return loginRequest({
             url:"/shoppingCart/add",
             method:'post',
-            params: { id: this.key }
+            params: { id: id,token:localStorage.getItem("token") }
+        })
+    },
+    get_shoppingCart() {
+        return loginRequest({
+            url:"/shoppingCart",
+            method:'post',
+            params: { token:localStorage.getItem("token") }
         })
     }
 }
