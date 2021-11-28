@@ -55,7 +55,7 @@ export default {
     },
     toBy(id) {
       this.$store.dispatch('asyncAddGoodItem',id)
-      //this.$router.push('/ShoppingCart');
+
     },
 
   }

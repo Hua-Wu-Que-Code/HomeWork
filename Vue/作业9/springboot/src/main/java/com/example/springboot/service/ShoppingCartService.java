@@ -16,17 +16,22 @@ public class ShoppingCartService {
     @Autowired
     Shopping_cartMapper shopping_cartMapper;
 
-
-    public List<Shopping_cart_item> findItems(Integer userId){
-        Integer shoppingCartId = shopping_cartMapper.findShoppingCartId(userId);
-        List<Shopping_cart_item> items = shopping_cart_itemMapper.findItemsById(shoppingCartId);
-        return  items;
-    }
-
     public Shopping_cart findShoppingCart(Integer userId){
         Integer shoppingCartId = shopping_cartMapper.findShoppingCartId(userId);
         Shopping_cart cart = shopping_cartMapper.findShoppingCartById(shoppingCartId);
         return  cart;
+    }
+
+    public int addItem(Integer userId,Integer bookId) {
+        Integer shoppingCartId = shopping_cartMapper.findShoppingCartId(userId);
+        List<Shopping_cart_item> items = shopping_cart_itemMapper.findItemsByIdAndCartId(shoppingCartId,bookId);
+        if (items.size() != 0) {
+            //更新数据
+            return shopping_cart_itemMapper.updateItem(shoppingCartId,bookId);
+        } else {
+            //插入数据
+            return shopping_cart_itemMapper.addItem(shoppingCartId,bookId);
+        }
     }
 
 }

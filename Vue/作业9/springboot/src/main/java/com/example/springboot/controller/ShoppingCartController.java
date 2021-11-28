@@ -20,6 +20,9 @@ import java.util.Map;
 
 @RestController
 public class ShoppingCartController {
+
+    Integer time = 0;
+
     @Autowired
     ShoppingCartService shoppingCartService;
 
@@ -31,12 +34,12 @@ public class ShoppingCartController {
      * token:在服务端解码
      */
     public Result addShoppingCartItem(Integer id ,String token) {
-        Map map = new HashMap();
         Integer userId = JwtUtil.parseToken(token);
-        map.put("id",id);
-        map.put("token",token);
-        map.put("userId",userId);
-        return Result.succeed(map);
+        int flag = shoppingCartService.addItem(userId,id);
+        if (flag != 0) {
+            return Result.succeed(flag);
+        }
+        return Result.fail();
     }
 
     @RequestMapping("/shoppingCart")
@@ -49,8 +52,9 @@ public class ShoppingCartController {
         //得到了用户id
         Integer userId = JwtUtil.parseToken(token);
         Shopping_cart cart = shoppingCartService.findShoppingCart(userId);
-        //List<Shopping_cart_item> lists = shoppingCartService.findItems(userId);
         if (cart != null) {
+            System.out.println("第"+time+"次购物车的数量是"+cart.getItems().size());
+            time++;
             return Result.succeed(cart);
         }
 

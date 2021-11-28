@@ -9,13 +9,12 @@
   <van-card
       v-for="(value,index) in list"
       :price="value.book.price"
-      v-if="value.book.num!=0"
       :desc="value.book.author"
       :thumb="value.book.img"
       style="padding-left: 30px"
   >
     <template #title>
-      {{value.name}}
+      {{value.book.name}}
       <van-icon name="delete-o" size="20" color="red" class="delete" @click="toDelete(value.book.id)"/>
     </template>
 
@@ -23,7 +22,7 @@
       <van-checkbox :name="value.book.id" v-model="value.flag" class="check" @click="iClick(value.book.id)" />
     </template>
     <template #footer>
-      <van-stepper v-model="value.book.num" theme="round" button-size="22" disable-input/>
+      <van-stepper v-model="value.num" theme="round" button-size="22" disable-input/>
     </template>
 
   </van-card>

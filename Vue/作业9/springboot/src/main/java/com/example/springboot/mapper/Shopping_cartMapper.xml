@@ -7,7 +7,7 @@
     </select>
 
     <select id="findShoppingCartById" resultMap="shoppingCartMap">
-        select c.id cid,c.total cart_total,i.book_id ,i.num,i.total item_total
+        select c.id cid,c.total cart_total,i.book_id ,i.num
         from shopping_cart c,shopping_cart_item i
         where c.id = #{cartId} and i.shopping_cart_id = c.id
     </select>
@@ -21,7 +21,6 @@
             <result property="shoppingCartId" column="shopping_cart_id"></result>
             <result property="bookId" column="book_id"></result>
             <result property="num" column="num"></result>
-            <result property="total" column="item_total"></result>
             <association property="book" javaType="com.example.springboot.entity.Book" column="book_id"
                          select="com.example.springboot.mapper.BookMapper.findBooksById" />
         </collection>

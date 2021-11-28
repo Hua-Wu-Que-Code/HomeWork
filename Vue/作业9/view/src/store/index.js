@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import network from "@/network/index"
+import router from '../router';
 
 
 Vue.use(Vuex)
@@ -13,9 +14,6 @@ const store = new Vuex.Store({
         login: false
     },
     mutations: {
-        addGoodItem(state,id) {
-
-        },
         deleteGoodItem(state,id) {
 
         },
@@ -49,7 +47,9 @@ const store = new Vuex.Store({
                 //初始化购物车
                 network.get_shoppingCart()
                     .then(res=>{
-                        context.commit('initGoodList',res.data.items)
+                        if (res.code == 100) {
+                            context.commit('initGoodList',res.data.items);
+                        }
                     })
             } else {
                 context.commit('initGoodList',"")
@@ -57,7 +57,9 @@ const store = new Vuex.Store({
         },
         asyncAddGoodItem(context,id){
             network.addGoodItem(id).then(res => {
-                console.log(res)
+                if (res.code == 100) {
+                    router.push('/ShoppingCart');
+                }
             })
         }
     },

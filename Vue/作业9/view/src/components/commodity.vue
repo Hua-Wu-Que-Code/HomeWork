@@ -78,7 +78,7 @@ export default {
       Toast('点击图标');
     },
     toBy(id) {
-      this.$store.commit('addGoodItem',id)
+      this.$store.dispatch('asyncAddGoodItem',id)
     },
   },
 
