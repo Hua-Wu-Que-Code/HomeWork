@@ -28,6 +28,13 @@ export default{
             params: { id: id,token:localStorage.getItem("token") }
         })
     },
+    deleteGoodItem(id) {
+        return loginRequest({
+            url:"/shoppingCart/delete",
+            method:'post',
+            params: { id: id,token:localStorage.getItem("token") }
+        })
+    },
     get_shoppingCart() {
         return loginRequest({
             url:"/shoppingCart",

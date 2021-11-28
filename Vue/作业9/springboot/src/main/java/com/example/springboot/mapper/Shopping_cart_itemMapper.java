@@ -13,4 +13,5 @@ public interface Shopping_cart_itemMapper {
 
     int addItem(Integer shoppingCartId,Integer bookId);
     int updateItem(Integer shoppingCartId,Integer bookId);
+    int deleteItem(Integer shoppingCartId,Integer bookId);
 }

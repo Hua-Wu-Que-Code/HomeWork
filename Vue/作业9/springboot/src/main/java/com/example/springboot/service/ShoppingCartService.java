@@ -34,4 +34,10 @@ public class ShoppingCartService {
         }
     }
 
+    public int deleteItem(Integer userId,Integer bookId) {
+        Integer shoppingCartId = shopping_cartMapper.findShoppingCartId(userId);
+        return shopping_cart_itemMapper.deleteItem(shoppingCartId,bookId);
+
+    }
+
 }

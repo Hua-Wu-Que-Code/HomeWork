@@ -14,9 +14,6 @@ const store = new Vuex.Store({
         login: false
     },
     mutations: {
-        deleteGoodItem(state,id) {
-
-        },
         changeItemFlag(state,id) {
 
         },
@@ -48,7 +45,11 @@ const store = new Vuex.Store({
                 network.get_shoppingCart()
                     .then(res=>{
                         if (res.code == 100) {
-                            context.commit('initGoodList',res.data.items);
+                            if (res.data == null) {
+                                context.commit('initGoodList',"")
+                            } else {
+                                context.commit('initGoodList',res.data.items);
+                            }
                         }
                     })
             } else {
@@ -59,6 +60,13 @@ const store = new Vuex.Store({
             network.addGoodItem(id).then(res => {
                 if (res.code == 100) {
                     router.push('/ShoppingCart');
+                }
+            })
+        },
+        asyncDeleteGoodItem(context,id) {
+            network.deleteGoodItem(id).then(res => {
+                if (res.code == 100) {
+                    context.dispatch('asyncInitShoppingCart')
                 }
             })
         }

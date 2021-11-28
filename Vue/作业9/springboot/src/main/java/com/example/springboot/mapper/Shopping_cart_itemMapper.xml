@@ -9,6 +9,9 @@
         set num = num+1
         where shopping_cart_id=#{shoppingCartId} and book_id=#{bookId}
     </update>
+    <delete id="deleteItem">
+        delete from shopping_cart_item where shopping_cart_id=#{shoppingCartId} and book_id = #{bookId}
+    </delete>
 
 
     <select id="findItemsById" resultType="com.example.springboot.entity.Shopping_cart_item">

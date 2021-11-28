@@ -65,8 +65,8 @@ export default {
       this.checked = this.checkedIf();
     },
     toDelete(id) {
-      this.$store.commit('deleteGoodItem',id)
-      this.load();
+      this.$store.dispatch('asyncDeleteGoodItem',id);
+
     },
     checkAll() {
 
