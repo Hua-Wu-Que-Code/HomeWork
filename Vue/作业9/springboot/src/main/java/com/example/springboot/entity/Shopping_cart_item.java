@@ -13,6 +13,8 @@ public class Shopping_cart_item {
 
     private Integer num;
 
+    private boolean check;
+
     //每一项纪录有包含有一个对象
     private Book book;
 

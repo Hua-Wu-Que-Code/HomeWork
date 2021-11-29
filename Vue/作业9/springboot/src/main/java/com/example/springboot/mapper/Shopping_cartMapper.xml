@@ -7,7 +7,7 @@
     </select>
 
     <select id="findShoppingCartById" resultMap="shoppingCartMap">
-        select c.id cid,c.total cart_total,i.book_id ,i.num
+        select c.id cid,c.total cart_total,i.book_id ,i.num,i.check
         from shopping_cart c,shopping_cart_item i
         where c.id = #{cartId} and i.shopping_cart_id = c.id
     </select>

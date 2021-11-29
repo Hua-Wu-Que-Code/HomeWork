@@ -19,7 +19,7 @@
     </template>
 
     <template #price-top>
-      <van-checkbox :name="value.book.id" v-model="value.flag" class="check" @click="iClick(value.book.id)" />
+      <van-checkbox :name="value.book.id" v-model="value.check" class="check" @click="iClick(value.book.id)" />
     </template>
     <template #footer>
       <van-stepper v-model="value.num" theme="round" button-size="22" disable-input/>
