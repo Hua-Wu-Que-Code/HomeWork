@@ -18,6 +18,13 @@
               <span>首页</span>
             </template>
           </el-menu-item>
+            <el-menu-item index="/profile">
+              <template>
+                <i class="el-icon-menu"></i>
+                <span>管理</span>
+              </template>
+            </el-menu-item>
+
           </el-menu>
   </div>
 </template>
