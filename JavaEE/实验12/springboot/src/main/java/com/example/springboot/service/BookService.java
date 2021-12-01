@@ -1,7 +1,5 @@
 package com.example.springboot.service;
 
-import com.example.springboot.entity.Book;
-import com.example.springboot.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

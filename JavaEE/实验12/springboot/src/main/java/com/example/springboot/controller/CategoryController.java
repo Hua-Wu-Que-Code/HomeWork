@@ -1,7 +1,5 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.entity.Result;
-import com.example.springboot.mapper.CategoryMapper;
 import com.example.springboot.service.BookService;
 import com.example.springboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

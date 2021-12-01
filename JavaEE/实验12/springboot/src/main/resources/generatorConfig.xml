@@ -47,6 +47,8 @@
         <!--domainObjectName:实体类的名称-->
         <table tableName="shopping_cart_item" domainObjectName="shopping_cart_item" ></table>
         <table tableName="shopping_cart" domainObjectName="shopping_cart" ></table>
+        <table tableName="user" domainObjectName="user" ></table>
+        <table tableName="book" domainObjectName="book" ></table>
 
 
     </context>

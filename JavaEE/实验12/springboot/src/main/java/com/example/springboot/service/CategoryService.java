@@ -1,7 +1,5 @@
 package com.example.springboot.service;
 
-import com.example.springboot.entity.Category;
-import com.example.springboot.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
 package com.example.springboot.controller;
 
 
-import com.example.springboot.entity.Result;
 import com.example.springboot.entity.Shopping_cart;
 import com.example.springboot.jwt.JwtUtil;
 import com.example.springboot.service.ShoppingCartService;
