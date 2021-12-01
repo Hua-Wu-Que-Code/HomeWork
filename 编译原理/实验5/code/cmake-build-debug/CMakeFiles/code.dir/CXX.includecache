@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/huawuque/Desktop/HomeWork/编译原理/实验5/code/main.cpp
+iostream
+-
+cstdio
+-
+vector
+-
+string
+-
+string.h
+-
+map
+-
+set
+-
+stack
+-
+queue
+-
+algorithm
+-
+fstream
+-
+
