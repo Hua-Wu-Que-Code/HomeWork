@@ -59,7 +59,6 @@ export default {
       } else {
         this.pageIndex = Math.ceil(page)+2;
       }
-      console.log(this.pageIndex)
     }
     this.getLoadList();
   },
@@ -79,7 +78,6 @@ export default {
     getLoadList() {
       const _self = this
       this.$ajax.get_category_books_WaterFall(this.key,this.pageIndex,this.pageSize).then(response => {
-        console.log(response)
         if (response.code === 100) {
           const rows = response.data
           if (rows == null || rows.length === 0) {

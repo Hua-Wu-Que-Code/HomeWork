@@ -6,27 +6,27 @@
       @click-right="onClickRight"
   />
   <van-checkbox-group v-model="result">
-  <van-card
-      v-for="(value,index) in list"
-      :title="value.book.name"
-      :price="value.book.price"
-      :desc="value.book.author"
-      :thumb="value.book.img"
-      style="padding-left: 30px"
-  >
-    <template #title>
-      {{value.book.name}}
-      <van-icon name="delete-o" size="20" color="red" class="delete" @click="toDelete(value.book.id)"/>
-    </template>
+    <van-swipe-cell v-for="(value,index) in list">
+      <van-card
+          :title="value.book.name"
+          :price="value.book.price"
+          :desc="value.book.author"
+          :thumb="value.book.img"
+          style="padding-left: 30px"
+      >
 
-    <template #price-top>
-      <van-checkbox :name="value.book.id" v-model="value.check" class="check" @click="iClick(value.book.id)" />
-    </template>
-    <template #footer>
-      <van-stepper v-model="value.num" theme="round" button-size="22" disable-input/>
-    </template>
+        <template #price-top>
+          <van-checkbox :name="value.book.id" v-model="value.check" class="check" @click="iClick(value.book.id)" />
+        </template>
+        <template #footer>
+          <van-stepper v-model="value.num" theme="round" button-size="22" disable-input/>
+        </template>
 
-  </van-card>
+      </van-card>
+      <template #right>
+        <van-button square text="删除" type="danger" class="delete-button" @click="toDelete(value.book.id)" />
+      </template>
+    </van-swipe-cell>
   </van-checkbox-group>
   <div style="height: 100px"></div>
   <van-submit-bar :price="total" button-text="提交订单" style="margin-bottom: 50px">
@@ -90,5 +90,12 @@ export default {
 .delete {
   float: right;
 }
+.goods-card {
+  margin: 0;
+  background-color: white;
+}
 
+.delete-button {
+  height: 100%;
+}
 </style>

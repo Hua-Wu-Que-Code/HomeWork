@@ -52,7 +52,6 @@ const store = new Vuex.Store({
             //初始化购物车
             network.get_shoppingCart()
                 .then(res=>{
-                    console.log(res)
                     if (res.code == 100) {
                         if (res.data == null) {
                             context.commit('initGoodList',"")

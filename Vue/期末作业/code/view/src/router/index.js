@@ -7,6 +7,9 @@ import test from "@/components/test";
 import ShoppingCart from "../views/ShoppingCart";
 import search from "@/components/search";
 import showList from "@/components/showList";
+import person from "@/views/person";
+import addressList from "@/components/addressList";
+import addressEdit from "@/components/addressEdit";
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,7 +41,6 @@ const routes = [
     },
     beforeEnter:(from,to,next) => {
       if (localStorage.getItem("username")) {
-        console.log("嘿嘿")
         next();
       } else {
         next('/login')
@@ -88,6 +90,30 @@ const routes = [
     path: '/showList',
     name: 'showList',
     component: showList,
+    meta: {
+      istrun: true
+    }
+  },
+  {
+    path: '/person',
+    name: 'person',
+    component: person,
+    meta: {
+      istrun: true
+    }
+  },
+  {
+    path: '/address',
+    name:'address',
+    component: addressList,
+    meta: {
+      istrun: true
+    }
+  },
+  {
+    path: '/addressEdit',
+    name:'addressEdit',
+    component: addressEdit,
     meta: {
       istrun: true
     }
