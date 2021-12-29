@@ -54,4 +54,46 @@ export default{
             params: {name:kw}
         })
     },
+    findIfCollected(bid) {
+        return loginRequest({
+            url: "/findBookIfCollected",
+            method: "post",
+            params: {token:localStorage.getItem("token"),bid:bid}
+        })
+    },
+    toCancelCollect(bid) {
+        return loginRequest({
+            url: "/toCancelCollect",
+            method: "post",
+            params: {token:localStorage.getItem("token"),bid:bid}
+        })
+    },
+    toCollect(bid,original) {
+        return loginRequest({
+            url: "/toCollect",
+            method: "post",
+            params: {token:localStorage.getItem("token"),bid:bid,original:original}
+        })
+    },
+    getCollection() {
+        return loginRequest({
+            url: "/toGetCollection",
+            method: "post",
+            params: {token:localStorage.getItem("token")}
+        })
+    },
+    addUserTrack(id) {
+        return loginRequest({
+            url: "/toAddUserTrack",
+            method: "post",
+            params: {token:localStorage.getItem("token"),bid:id}
+        })
+    },
+    getUserTrack() {
+        return loginRequest({
+            url: "/toGetUserTrack",
+            method: "post",
+            params: {token:localStorage.getItem("token")}
+        })
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.springboot.service;
 
 import com.example.springboot.entity.Book;
+import com.example.springboot.entity.Collection;
 import com.example.springboot.mapper.BookMapper;
+import com.example.springboot.mapper.CollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +46,21 @@ public class BookService {
         return bookMapper.findBookByName(name);
     }
 
+    @Autowired
+    CollectionMapper collectionMapper;
+    public Collection findIfCollected(Integer uid, Integer bid) {
+        return collectionMapper.ifCollectedByUserId(uid,bid);
+    }
+
+    public int toCollect(Integer uid,Integer bid,double original) {
+        return collectionMapper.toCollect(uid, bid, original);
+    }
+
+    public int toCancelCollect(Integer uid,Integer bid) {
+        return collectionMapper.toCancelCollect(uid, bid);
+    }
+
+    public List<Collection> getCollection(Integer uid) {
+        return collectionMapper.getAllCollection(uid);
+    }
 }

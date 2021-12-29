@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.UserTrackMapper">
+    <select id="getUserTrack" resultMap="UserTrackMap">
+        select * from user_track where uid =#{uid}
+    </select>
+
+    <resultMap id="UserTrackMap" type="com.example.springboot.entity.UserTrack">
+
+        <association property="book" javaType="com.example.springboot.entity.Book" column="bid"
+                     select="com.example.springboot.mapper.BookMapper.findBooksById" />
+    </resultMap>
+</mapper>

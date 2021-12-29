@@ -21,9 +21,9 @@
     </div>
     <div class="base">
       <van-grid :border="false">
-        <van-grid-item icon="star-o" text="收藏" />
+        <van-grid-item icon="star-o" text="收藏" to="/collection"/>
         <van-grid-item icon="shop-o" text="订阅" />
-        <van-grid-item icon="underway-o" text="足迹" />
+        <van-grid-item icon="underway-o" text="足迹" to="/track"/>
         <van-grid-item icon="balance-pay" text="零钱" />
       </van-grid>
     </div>

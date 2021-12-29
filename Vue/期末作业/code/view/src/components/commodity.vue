@@ -23,14 +23,15 @@
     >
       <template #tags>
         <van-tag plain type="primary">{{message.publisher}}</van-tag><br />
-<!--        <van-tag type="danger" style="margin-top: 5px">{{message.category}}</van-tag><br/>-->
+        <!--        <van-tag type="danger" style="margin-top: 5px">{{message.category}}</van-tag><br/>-->
       </template>
     </van-card>
     <div class="description" v-html="message.description"></div>
     <div style="height: 5rem"></div>
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
-      <van-goods-action-icon icon="star" text="已收藏" @click="toCollect(message.id)" class="check"/>
+      <van-goods-action-icon v-if="!ifCollect" icon="star-o" text="收藏" @click="toCollect(message.id,message.price)" class="check"/>
+      <van-goods-action-icon v-if="ifCollect" icon="star" text="已经收藏" @click="toCancelCollect(message.id)" class="check"/>
       <van-goods-action-icon icon="shop-o" text="店铺" @click="onClickIcon" />
       <van-goods-action-button
           type="danger"
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+import {Dialog, Toast} from 'vant';
 
 export default {
   name: "commodity",
@@ -50,16 +51,27 @@ export default {
     return {
       id:'',
       message:{},
+      ifCollect: false,
     }
   },
   created: function () {
     let self = this;
     this.id = this.$route.params.id;
+    if (localStorage.getItem("token")) {
+      this.$ajax.addUserTrack(this.id).then(res => {
+
+      })
+    }
     this.$ajax.get_book_detailed(this.id)
-    .then(function(response){
-      self.message = response.data;
-      self.message.img = "/" + self.message.img;
-      self.message.description = self.message.description.replaceAll("\\n", '<br>')
+        .then(function(response){
+          self.message = response.data;
+          self.message.img = "/" + self.message.img;
+          self.message.description = self.message.description.replaceAll("\\n", '<br>')
+        })
+    this.$ajax.findIfCollected(this.id).then(res=> {
+      if (res.data != null) {
+        this.ifCollect = true;
+      }
     })
   },
   mounted(){
@@ -75,8 +87,21 @@ export default {
     toBy(id) {
       this.$store.dispatch('asyncAddGoodItem',id)
     },
-    toCollect(id) {
-
+    toCollect(id,original) {
+      this.$ajax.toCollect(id,original).then(res => {
+        if (res.code === 100) {
+          this.$toast.success("收藏成功")
+          this.ifCollect = true;
+        }
+      })
+    },
+    toCancelCollect(id) {
+      this.$ajax.toCancelCollect(id).then(res => {
+        if (res.code === 100) {
+          this.$toast.success("取消成功")
+          this.ifCollect = false;
+        }
+      })
     }
   },
 

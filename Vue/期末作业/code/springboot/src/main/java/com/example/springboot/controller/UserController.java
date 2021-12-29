@@ -30,9 +30,30 @@ public class UserController {
         return Result.fail();
     }
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "hello";
+
+    @PostMapping("/toAddUserTrack")
+    @CrossOrigin
+    @ResponseBody
+    public Result addUserTrack(String token,Integer bid) {
+
+        Integer uid = JwtUtil.parseToken(token);
+        if (userService.findUserTrack(uid, bid) != null) {
+            return Result.succeed(userService.updateUserTrack(uid,bid));
+        } else {
+            return Result.succeed(userService.updateUserTrack(uid,bid));
+        }
     }
+
+    @PostMapping("/toGetUserTrack")
+    @CrossOrigin
+    @ResponseBody
+    public Result getUserTrack(String token) {
+
+        Integer uid = JwtUtil.parseToken(token);
+        if (userService.getUserTrack(uid).size() != 0) {
+            return Result.succeed(userService.getUserTrack(uid));
+        } else return Result.succeed(0);
+    }
+
 
 }

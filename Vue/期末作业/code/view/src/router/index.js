@@ -10,6 +10,8 @@ import showList from "@/components/showList";
 import person from "@/views/person";
 import addressList from "@/components/addressList";
 import addressEdit from "@/components/addressEdit";
+import Collection from "@/views/Collection";
+import FootTrack from "@/components/FootTrack";
 Vue.use(VueRouter)
 
 const routes = [
@@ -117,7 +119,23 @@ const routes = [
     meta: {
       istrun: true
     }
-  }
+  },
+  {
+    path: '/collection',
+    name:'collection',
+    component: Collection,
+    meta: {
+      istrun: true
+    }
+  },
+  {
+    path: '/track',
+    name:'track',
+    component: FootTrack,
+    meta: {
+      istrun: true
+    }
+  },
 ]
 
 const originalPush = VueRouter.prototype.push

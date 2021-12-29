@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.entity.Result;
+import com.example.springboot.jwt.JwtUtil;
 import com.example.springboot.mapper.CategoryMapper;
 import com.example.springboot.service.BookService;
 import com.example.springboot.service.CategoryService;
@@ -64,6 +65,38 @@ public class CategoryController {
         return Result.fail();
     }
 
+    @RequestMapping("/findBookIfCollected")
+    @CrossOrigin
+    @ResponseBody
+    public Result findIfCollected(String token,Integer bid) {
+        if (token != null) {
+            Integer uid = JwtUtil.parseToken(token);
+            return Result.succeed(bookService.findIfCollected(uid,bid));
+        } return Result.succeed(false);
+    }
 
+    @RequestMapping("/toCollect")
+    @CrossOrigin
+    @ResponseBody
+    public Result toCollect(String token,Integer bid,double original) {
+        Integer uid = JwtUtil.parseToken(token);
+        return Result.succeed(bookService.toCollect(uid,bid,original));
+    }
+
+    @RequestMapping("/toCancelCollect")
+    @CrossOrigin
+    @ResponseBody
+    public Result toCancelCollect(String token,Integer bid) {
+        Integer uid = JwtUtil.parseToken(token);
+        return Result.succeed(bookService.toCancelCollect(uid,bid));
+    }
+
+    @RequestMapping("/toGetCollection")
+    @CrossOrigin
+    @ResponseBody
+    public Result toGetCollection(String token) {
+        Integer uid = JwtUtil.parseToken(token);
+        return Result.succeed(bookService.getCollection(uid));
+    }
 
 }
