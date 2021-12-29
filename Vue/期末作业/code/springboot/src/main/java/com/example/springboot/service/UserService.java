@@ -39,4 +39,13 @@ public class UserService {
     }
 
     public List<UserTrack> getUserTrack(Integer uid) {return userTrackMapper.getUserTrack(uid);}
+
+    public int alertAvatar(Integer uid,String avatar) {
+        User user = userMapper.queryUser(uid);
+        if (user.getAvatar() != null) {
+            return userMapper.alertAvatar(uid,avatar);
+        } else {
+            return userMapper.addAvatar(uid,avatar);
+        }
+    }
 }

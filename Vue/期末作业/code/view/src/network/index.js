@@ -95,5 +95,12 @@ export default{
             method: "post",
             params: {token:localStorage.getItem("token")}
         })
+    },
+    alertAvatar(base64) {
+        return loginRequest({
+            url: "/toAlertAvatar",
+            method: "post",
+            params: {token:localStorage.getItem("token"),base:base64}
+        })
     }
 }

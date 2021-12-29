@@ -50,8 +50,10 @@ export default {
         let self = this;
         this.$ajax.login(this.accountName,this.passWord).then(res => {
           if (res.code == 100) {
+            console.log(res.data)
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("username",res.data.name);
+            localStorage.setItem("avatar",res.data.avatar);
             this.$store.commit('changeLogin',true);
             this.$store.dispatch('asyncInitShoppingCart');
             this.$router.push({name:'Info'});

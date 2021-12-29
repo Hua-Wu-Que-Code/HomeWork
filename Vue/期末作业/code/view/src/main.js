@@ -2,7 +2,7 @@ import Vue from 'vue'
 import './plugins/axios'
 import App from './App.vue'
 import router from './router'
-import Vant,{Lazyload} from 'vant'
+import Vant,{Lazyload,Uploader} from 'vant'
 import 'vant/lib/index.css'
 import network from "./network/index";
 import store from "./store";
@@ -15,6 +15,7 @@ Vue.config.devtool=true
 
 Vue.use(Vant);
 Vue.use(Lazyload);
+Vue.use(Uploader);
 
 
 new Vue({

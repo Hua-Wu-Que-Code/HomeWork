@@ -24,7 +24,7 @@ public class UserController {
     public Result login(@RequestBody User user) {
         User loginUser = userService.findUser(user);
         if (loginUser != null) {
-            UserVO userVO = new UserVO(loginUser.getUsername(),JwtUtil.generateToken(loginUser.getId()),loginUser.getPrivilege());
+            UserVO userVO = new UserVO(loginUser.getUsername(),JwtUtil.generateToken(loginUser.getId()),loginUser.getPrivilege(),loginUser.getAvatar());
             return Result.succeed(userVO);
         }
         return Result.fail();
@@ -53,6 +53,17 @@ public class UserController {
         if (userService.getUserTrack(uid).size() != 0) {
             return Result.succeed(userService.getUserTrack(uid));
         } else return Result.succeed(0);
+    }
+
+    @PostMapping("/toAlertAvatar")
+    @CrossOrigin
+    @ResponseBody
+    public Result toAlertAvatar(String token,String base) {
+
+        Integer uid = JwtUtil.parseToken(token);
+        if (userService.alertAvatar(uid,base) != 0) {
+            return Result.succeed("修改成功");
+        } else return Result.fail();
     }
 
 

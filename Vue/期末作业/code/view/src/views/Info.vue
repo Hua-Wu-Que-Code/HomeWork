@@ -9,13 +9,16 @@
       </template>
     </van-nav-bar>
     <div class="cell">
-      <van-image
-          round
-          width="80px"
-          height="80px"
-          src="/icons/avatar_default.png"
-          class="t"
-      />
+      <!-- vant代码 -->
+      <van-uploader :after-read="Uploader" >
+        <van-image
+            round
+            width="80px"
+            height="80px"
+            :src="base"
+            class="t"
+        />
+      </van-uploader>
       <div class="name">{{msg}}</div>
 <!--      <div class="signature">{{signature}}</div>-->
     </div>
@@ -49,15 +52,28 @@ export default {
       msg: "",
       bMsg: "退出",
       signature: '点击这里可以添加个性签名',
+      base: 'data:image/png;base64,'
     }
   },
   methods: {
     init() {
       this.msg = localStorage.getItem("username");
+      this.base = this.base+localStorage.getItem("avatar");
     },
     onClickRight() {
       this.$router.push({name:'person'})
-    }
+    },
+    Uploader(file) {
+      // 此时可以自行将文件上传至服务器
+      let base64 = file.content.replace(/^data:image\/\w+;base64,/, '')
+      console.log(base64);
+      this.$ajax.alertAvatar(base64).then(res => {
+        if (res.config === 100) {
+          this.$toast.success("修改成功")
+          this.base = this.base + base64;
+        }
+      })
+    },
   },
   created() {
     this.init();
