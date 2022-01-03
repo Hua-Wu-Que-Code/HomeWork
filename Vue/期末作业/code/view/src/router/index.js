@@ -12,6 +12,7 @@ import addressList from "@/components/addressList";
 import addressEdit from "@/components/addressEdit";
 import Collection from "@/views/Collection";
 import FootTrack from "@/components/FootTrack";
+import OrderForm from "@/components/OrderForm";
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +23,14 @@ const routes = [
   {
     path:'/test',
     component: test
+  },
+  {
+    path: '/OrderForm',
+    name: 'OrderForm',
+    component: OrderForm,
+    meta: {
+      istrun: true
+    }
   },
   {
     path: '/',
@@ -73,7 +82,6 @@ const routes = [
     component: ShoppingCart,
     beforeEnter:(from,to,next) => {
       if (localStorage.getItem("username")) {
-        console.log("嘿嘿")
         next();
       } else {
         next('/login')

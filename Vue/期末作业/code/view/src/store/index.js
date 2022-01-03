@@ -8,15 +8,16 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        goodsList: [],
+        goodsList: [], //购物车
         books: [[],[],[],[],[],[]], //瀑布式加载数据
-        total: 0,
         category:[],
         login: false
     },
     mutations: {
-        changeItemFlag(state,id) {
-
+        changeAllItemFlag(state,flag) {
+            for (let i =0;i<state.goodsList.length;i++) {
+                state.goodsList[i].check = flag;
+            }
         },
         changeLogin(state,flag) {
             state.login = flag;
@@ -25,6 +26,9 @@ const store = new Vuex.Store({
             state.category = list;
         },
         initGoodList(state,list) {
+            for (let i =0;i<list.length;i++) {
+                list[i].check = false;
+            }
             state.goodsList = list;
         },
         initBooks(state,playLoad) {

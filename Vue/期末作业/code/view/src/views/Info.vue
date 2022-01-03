@@ -68,9 +68,10 @@ export default {
       let base64 = file.content.replace(/^data:image\/\w+;base64,/, '')
       console.log(base64);
       this.$ajax.alertAvatar(base64).then(res => {
-        if (res.config === 100) {
+        console.log(res)
+        if (res.code === 100) {
           this.$toast.success("修改成功")
-          this.base = this.base + base64;
+          this.base = 'data:image/png;base64,' + base64;
         }
       })
     },

@@ -100,7 +100,7 @@ export default{
         return loginRequest({
             url: "/toAlertAvatar",
             method: "post",
-            params: {token:localStorage.getItem("token"),base:base64}
+            data: {token:localStorage.getItem("token"),base:base64}
         })
     }
 }

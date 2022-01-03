@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "92578483",
+      "name": "居乐乐 地点",
+      "font_class": "ditu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "92578484",
+      "name": "下降趋势",
+      "font_class": "downswing",
+      "unicode": "e6df",
+      "unicode_decimal": 59103
+    },
+    {
+      "icon_id": "92578485",
+      "name": "up",
+      "font_class": "up",
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
+    }
+  ]
+}

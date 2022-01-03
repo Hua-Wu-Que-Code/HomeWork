@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {Dialog} from "vant";
+
 
 export default {
   name: "Collection",

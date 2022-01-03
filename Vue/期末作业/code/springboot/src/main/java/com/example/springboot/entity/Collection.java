@@ -9,6 +9,6 @@ public class Collection {
     private Integer id;
     private Integer bid;
     private Integer uid;
-
+    private double original;
     private Book book;
 }

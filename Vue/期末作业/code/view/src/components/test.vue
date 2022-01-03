@@ -1,121 +1,86 @@
 <template>
-  <div id="books">
-    <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
-      <van-list
-          v-model="isUpLoading"
-          :finished="upFinished"
-          :immediate-check="false"
-          finished-text="没有更多了"
-          @load="onLoad"
-      >
-        <van-cell v-for="(value,index) in dtWinNumberInfos" :key="value.id" >
+  <div>
+    <!-- 支付按钮，模拟支付操作 -->
+    <van-button type="primary" @click="pay">支付</van-button>
 
-          <van-card
-              :price="value.price"
-              :desc="value.author"
-              :title="value.name"
-              @click-thumb="hand(value.id)"
-              :thumb="value.img"
-              style="text-align: left"
-          >
-            <template #tags>
-              <van-tag type="danger">{{value.publisher}}</van-tag>
-            </template>
-            <template #footer>
-              <van-icon @click="toBy(value.id)" name="shopping-cart" size="30" color="red" />
-            </template>
-          </van-card>
-        </van-cell>
-      </van-list>
-    </van-pull-refresh>
-    <div style="height: 5rem"></div>
+    <el-dialog :title="paySucc?'支付成功':'扫码支付'" :visible.sync="dialogVisible" width="16%" center>
+      <!-- 生成二维码图片 -->
+      <vueQr :text="text" :size="150" v-if="!paySucc"></vueQr>
+      <!-- 使用websocket监控是否扫描，扫描成功显示成功并退出界面 -->
+      <span class="iconfont icon-success" style="position: relative;font-size: 100px;color:#42B983;margin-left: 50px;top:-10px;" v-else></span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import mapMutations, {mapState} from "vuex";
-
+import vueQr from 'vue-qr'
 export default {
-  name: "test",
   data() {
     return {
-      key: 1,
-      message:[],
-      list: [],
-      pageSize: 10, // 每页条数
-      pageIndex: 1, // 页码
-      dtWinNumberInfos: [], // 请求数据
-      isDownLoading: false, //下拉刷新
-      isUpLoading: false, //上拉加载
-      upFinished: false,  //上拉加载完毕
-
+      dialogVisible: false,
+      text: "",
+      paySucc: false
     }
   },
-  created: function () {
-    this.getLoadList();
+  components: {
+    vueQr
   },
-  computed: {
-    ...mapState({books:'books'})
-  },
-  methods:{
-    hand(index) {
-      const id = index;
-      this.$router.push({name:"Books",params:{id}});
-    },
-    toBy(id) {
-      this.$store.dispatch('asyncAddGoodItem',id)
-    },
-    // 获取资源表单列表
-    getLoadList() {
-      const _self = this
-      this.$ajax.get_category_books_WaterFall(this.key,this.pageIndex,this.pageSize).then(response => {
-        console.log(response)
-        if (response.code === 100) {
-          const rows = response.data
-          if (rows == null || rows.length === 0) {
-            // 加载结束
-            _self.upFinished = true
-            return
-          }
-          if (rows.length < this.pageSize) {
-            // 最后一页不足10条的情况
-            _self.upFinished = true
-          }
-          // 处理数据
-          for (let i = 0; i < rows.length; i++) {
-            rows[i].img = "/" + rows[i].img;
-          }
-          if (_self.pageIndex === 1) {
-            _self.dtWinNumberInfos = rows
-          } else {
-            _self.dtWinNumberInfos = _self.dtWinNumberInfos.concat(rows)
-          }
-          this.$store.dispatch('asyncInitCategoryBooksWater',{key: this.key,list:this.dtWinNumberInfos});
-        }
-      }).catch(error => {
-        this.$message({
-          showClose: true,
-          message: '获取资源列表异常{' + error + '}',
-          type: 'error'
-        })
-      }).finally(() => {
-        _self.isDownLoading = false
-        _self.isUpLoading = false
+  methods: {
+    pay() {
+      let _this = this;
+      _this.paySucc = false;
+      _this.dialogVisible = true;
+      this.axios.request("http://localhost:9990/createQR")
+          .then((response) => {
+            _this.text = response.data;
+            _this.dialogVisible = true;
+            //使用webSocket发送请求，下面会简单介绍websocket使用
+            if ("WebSocket" in window) {
+              // 打开一个 web socket
+              var ws = new WebSocket("ws://localhost:9990/bindingRecord");
+
+              ws.onopen = function() {
+                // Web Socket 已连接上，使用 send() 方法发送数据
+                // ws.send("data");
+                // alert("数据发送中...");
+              };
+
+              ws.onmessage = function(evt) {
+                var received_msg = evt.data;
+                // alert("数据已接收..." + evt.data);
+                if (Boolean(evt.data)) {
+                  _this.paySucc = true;
+                  setTimeout(() => {
+                    _this.dialogVisible = false;
+                  }, 3 * 1000);
+                }
+                ws.close();
+
+              };
+
+              ws.onclose = function() {
+                // // 关闭 websocket
+                console.log("连接已关闭...");
+              };
+            } else {
+              // 浏览器不支持 WebSocket
+              alert("您的浏览器不支持 WebSocket!");
+            }
+          }).catch((err) => {
+        console.log(err)
       })
     },
-    //上拉加载请求方法
-    onLoad() {
-      this.pageIndex++
-      this.getLoadList()
-    },
-    onDownRefresh() {
-      this.pageIndex = 1
-      this.upFinished = false // 不写这句会导致你上拉到底过后在下拉刷新将不能触发下拉加载事件
-      this.onLoad() // 加载数据
-    },
+    back(dataUrl, id) {
+      console.log(dataUrl, id)
+    }
   }
 }
 </script>
 
-<style scoped>
+<style>
+.btn {
+  margin-left: 100px;
+}
 </style>
+

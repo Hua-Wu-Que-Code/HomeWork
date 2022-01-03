@@ -5,6 +5,7 @@ import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserVO;
 import com.example.springboot.jwt.JwtUtil;
 import com.example.springboot.service.UserService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -58,12 +59,16 @@ public class UserController {
     @PostMapping("/toAlertAvatar")
     @CrossOrigin
     @ResponseBody
-    public Result toAlertAvatar(String token,String base) {
+    public Result toAlertAvatar(@RequestBody Object playLoad) {
 
-        Integer uid = JwtUtil.parseToken(token);
-        if (userService.alertAvatar(uid,base) != 0) {
+        JSONObject jsonobject = JSONObject.fromObject(playLoad);
+        System.out.println("我要打印啦");
+
+        System.out.println("我打印完啦");
+        return Result.succeed(1);
+        /*if (userService.alertAvatar(uid,base) != 0) {
             return Result.succeed("修改成功");
-        } else return Result.fail();
+        } else return Result.fail();*/
     }
 
 
