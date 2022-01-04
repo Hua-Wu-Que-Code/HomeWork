@@ -70,5 +70,13 @@ public class UserController {
         } else return Result.fail();*/
     }
 
+    @PostMapping("/hello")
+    @CrossOrigin
+    @ResponseBody
+    public void sayHello() {
+        System.out.println("hello");
+
+    }
+
 
 }
