@@ -102,5 +102,12 @@ export default{
             method: "post",
             data: {token:localStorage.getItem("token"),base:base64}
         })
+    },
+    getBuyBooks(books) {
+        return loginRequest({
+            url: "/getBuyBooks",
+            method: "post",
+            params: {buys:books}
+        })
     }
 }

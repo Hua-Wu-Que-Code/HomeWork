@@ -95,4 +95,3 @@ public class AliReturnPayBean implements Serializable {
                 + ", trade_status=" + trade_status + ", trade_no=" + trade_no + "]";
     }
 }
-

@@ -1,16 +1,17 @@
 package com.example.springboot.controller;
 
 
+import com.example.springboot.entity.Book;
 import com.example.springboot.entity.Result;
 import com.example.springboot.entity.Shopping_cart;
 import com.example.springboot.jwt.JwtUtil;
+import com.example.springboot.service.BookService;
 import com.example.springboot.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -66,5 +67,22 @@ public class ShoppingCartController {
         Shopping_cart cart = shoppingCartService.findShoppingCart(userId);
         return Result.succeed(cart);
 
+    }
+
+
+    @Autowired
+    BookService bookService;
+    @RequestMapping("/getBuyBooks")
+    @CrossOrigin
+    @ResponseBody
+    public Result getBuyBooks(String buys) {
+        System.out.println("开始打印啦");
+        String[] book = buys.split(",");
+        List<Book> bookList = new ArrayList<>();
+        for (String b:book) {
+            Integer bid = Integer.parseInt(b);
+            bookList.add(bookService.findBookById(bid));
+        }
+        return Result.succeed(bookList);
     }
 }

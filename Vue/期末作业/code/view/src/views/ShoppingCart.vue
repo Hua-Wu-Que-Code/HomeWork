@@ -32,7 +32,7 @@
   </van-submit-bar>
   <van-submit-bar   button-text="提交订单" style="margin-bottom: 50px" v-if="ifManage">
     <template #default>
-      <van-checkbox v-model="checked"  @click="checkAll" style="margin-right: 132px">全选</van-checkbox>
+      <van-checkbox v-model="checked"  @click="checkAll" style="margin-right: 190px">全选</van-checkbox>
     </template>
     <template #button>
       <van-tag plain  round  type="warning" size="large" style="margin-right: 10px" @click="addCollectionAll">加入收藏夹</van-tag>
@@ -78,8 +78,11 @@ export default {
           buys.push(book);
         }
       }
-      console.log(buys)
-      this.$router.push({name:'OrderForm'})
+      if(buys.length == 0) {
+        this.$toast.fail("请选择商品")
+      } else {
+        this.$router.push({name:"OrderForm",query:{buys}});
+      }
     },
     addCollectionAll() {
       let collection = [];

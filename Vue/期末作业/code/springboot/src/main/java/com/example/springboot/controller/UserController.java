@@ -1,11 +1,11 @@
 package com.example.springboot.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.springboot.entity.Result;
 import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserVO;
 import com.example.springboot.jwt.JwtUtil;
 import com.example.springboot.service.UserService;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +61,6 @@ public class UserController {
     @ResponseBody
     public Result toAlertAvatar(@RequestBody Object playLoad) {
 
-        JSONObject jsonobject = JSONObject.fromObject(playLoad);
         System.out.println("我要打印啦");
 
         System.out.println("我打印完啦");
